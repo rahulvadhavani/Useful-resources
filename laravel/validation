@@ -1,0 +1,20 @@
+//Validation Rules with softdelete
+$rules = [
+    'name' => 'required|string|max:255',
+    'dateofbirth' => ['required','date','date_format:Y-m-d','before:' . Carbon::now()->subYears(10)->format('Y-m-d')],
+    'email' => 'required|string|email|max:255|unique:users,email,deleted_at,NULL',
+  'phonenumber' => ['required','regex:/^([0-9\s\-\+\(\)]*)$/','min:10'],
+    'start_date' => 'required|date|date_format:Y-m-d'',
+    'end_date' => 'required|date|date_format:Y-m-d|after:start_date',
+    'user_id' => ['required','integer','exists:users,id,deleted_at,NULL' ],
+    'start_time' => 'required|date_format:H:i',
+    'end_time' => 'required|date_format:H:i|after:start_time',
+    'age' => 'required|numeric|between:1,1000',
+    'gender' => 'required|in:male,female,other',
+];
+
+//for update related Rules
+
+$rules = [
+    'email' => 'required|string|email|max:255|unique:users,email,deleted_at,NULL'.'|ignore:' . $request->id,
+];
