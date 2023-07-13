@@ -7,5 +7,5 @@
 ##Node : https://docs.google.com/document/d/1Ush4NTa43lWsqa_dDYKFcR-nnvXZMp7or0ZXTNC1EFY/edit
 
 #open AI bot: 
-https://www.perplexity.ai
-https://chatgptfree.ai/chat/
+- https://www.perplexity.ai
+- https://chatgptfree.ai/chat
