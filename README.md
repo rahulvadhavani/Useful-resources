@@ -9,3 +9,4 @@
 #open AI bot: 
 - https://www.perplexity.ai
 - https://chatgptfree.ai/chat
+- https://chat.chatgptdemo.net
