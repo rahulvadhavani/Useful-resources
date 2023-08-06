@@ -122,9 +122,9 @@ class User extends Authenticatable
         //     Passport::routes();
         // }
         Passport::ignoreRoutes();
-        Passport::tokensExpireIn(now()->addSecond(60));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        Passport::tokensExpireIn(now()->addDays(1));
+        Passport::refreshTokensExpireIn(now()->addMonths(6));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(12));
     }
 ```
 
