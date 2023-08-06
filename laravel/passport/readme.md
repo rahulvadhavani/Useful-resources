@@ -357,3 +357,20 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Api'], function () {
 
 
 ```
+
+
+# Troubleshooting
+
+## If installation show error  of sodium extension
+-> goto php.ini and find sodium  and remove ; from line and restart xampp
+
+## If other installation error
+-> delete composer.json.lock and then install the passport
+
+## If want to reset the all configuration of keys
+-> php artisan migrate:rollback --path=vendor/laravel/passport/database/migrations
+   this remove table from DB so after this run migration and passport  install command
+  ```
+  php artisan migrate
+  php artisan passport:install
+  ```
