@@ -11,10 +11,10 @@
 - https://chatgptfree.ai/chat
 - https://chat.chatgptdemo.net
 
-#VScode extension
--snazzy operator (theme)
--Material Icon Theme
--git graph
--PHP Intelephense
--Laravel goto view
--Laravel Extra Intellisense
+##VScode extension
+- snazzy operator (theme)
+- Material Icon Theme
+- git graph
+- PHP Intelephense
+- Laravel goto view
+- Laravel Extra Intellisense
