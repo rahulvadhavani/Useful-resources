@@ -22,3 +22,8 @@
 
 ##Firebase push nptofication
 https://apoorv-pandey.medium.com/flutter-firebase-push-notification-2023-with-redirection-from-notification-fcm-c158f5bb16ab#:~:text=Background%3A-,Background,-%3A
+
+##Razorpay
+https://razorpay.com/docs/payments/payment-gateway/flutter-integration/standard/build-integration/#16-create-an-order-in-server
+
+
