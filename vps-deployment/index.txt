@@ -1,0 +1,150 @@
+~sudo apt update   (update package list on Linux server)
+~sudo apt install apache2 (install apache server)
+~sudo ufw allow "Apache Full"  (allow to access our server by ip)
+~sudo apt install ufw (if you get error ufw not found from above command)
+:hit ip from browser to see apache server index page
+
+~sudo apt install php libapache2-mod-php php-mbstring php-gd php-xml php-cli php-zip php-json php-curl php-intl php-mysql  (install php with necessary extention)
+
+~sudo nano /var/www/html/test.php   (run php file and check everything working or not)
+
+<?php 
+echo phpinfo();
+?>
+
+:ctr+x then say yes for save and enterkey or ctr+o, ctr+x
+:now goto browser and check this file by ip+/test.php
+
+
+~sudo apt install mysql-server  (install mysql server)
+~sudo mysql (enter in mysql cmd)
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'SetRoot PasswordHere';
+
+exit  (exit mysql)
+--------------------------------------------
+~sudo mysql_secure_installation   (secure your mysql server)
+
+->validate password component (no)
+->change the root password (no)
+->remove anonymous users (yes)
+->disable rool login remotely  (yes)
+->remove test database and access to it (yes)
+->reload privilege table now (yes)
+
+~sudo mysql
+
+CREATE DATABASE laravelexample CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+--------------------------------------------
+
+~sudo apt install git (install git on server)
+
+goto www/html directory
+
+~set username and email and create password from git and use it while cloning 
+~git clone your_git_repo
+
+#install composer
+--------------------------------------------
+goto : https://getcomposer.org/download/#:~:text=Command%2Dline%20installation
+
+copy and run in cmd
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+~sudo mv composer.phar /usr/local/bin/composer  (globally available)
+
+~composer 
+~ask permission as root so (yes this option)
+--------------------------------------------
+
+Gogo project directory: 
+~composer install
+~cp .env.example .env
+~sudo nano .env (set env file)
+
+-------------------------------
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1 
+DB_PORT=3306
+DB_DATABASE=laravel_example 
+DB_USERNAME=root 
+DB_PASSWORD={root user password }
+-------------------------------
+
+~php artisan migrate
+
+~sudo chgrp -R www-data /var/www/html/laravelexample  (change user group for project)
+~ls -la (check changed from root to www-data)
+~sudo chmod -R 775 /var/www/html/laravelexample/storage 
+
+------------------------------------ 
+Create Apache config for our application
+
+~cd /etc/apache2/sites-available
+~sudo nano laravelexample.net.conf
+
+ <VirtualHost *:80>
+    ServerName laravelexample.net
+    ServerAdmin webmaster@thedomain.com
+    DocumentRoot /var/www/laravelexample/public
+    <Directory /var/www/laravelexample>
+       AllowOverride All
+    </Directory>
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+ctr+o  ctr+x
+
+~sudo azdissite e00-default.conf (disable default configuration file)
+~sudo a2ensite laravelexample.net.conf  (enable our recently created conf.)
+~sudo a2enmod rewrite (enable rewrite  permission)
+------------------------------------ 
+
+~sudo service apache2 restart (restart server)
+
+#hit ip on browser and check project
+
+
+
+------------------------------------ 
+#set domains 
+
+->On your domain  provider dashboard
+->DNS and name server section
+
+here we gonna setup our A record and cname record
+Note: if you have already default A record and cname record  then delete that 
+
+->now copy ip address from your server ip and select  type "A" and enter your ip address and submit
+->now copy the domain see your project by domain
+
+------------------------------------ 
+
+--------------------------------------
+#Incase you want to use node module
+
+ ~curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - 8&\ sudo apt-get install -y nodejs
+
+~npm install (from your project directory)
+~npm run build
+--------------------------------------
+ 
+------------------------------------ 
+# ssl installation
+
+~sudo apt install certbot python3-certbot-apache
+~sudo certbot --apache
+ Note:  first time it ask for email and t&c and newsletter subscription
+
+which name you would like to activate HTTPS for ?  (enter menas for all)
+
+then get success message and https url of our website 
+------------------------------------ 
+
+
