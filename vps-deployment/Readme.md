@@ -225,4 +225,16 @@ Follow the prompts to configure HTTPS for your domain.
 Your server should now be set up and running. Access your Laravel project via your domain name or IP address.
 ```
 
+If in fresh server getting Not Found then 
+- cd /etc/apache2/
+- sudo nano apache2.conf
+
+CHeck below permission 
+<Directory /var/www/html>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+- sudo systemctl restart apache2 
 This markdown file provides clear and organized instructions for setting up your server step by step. Feel free to use it as your README.md file.
